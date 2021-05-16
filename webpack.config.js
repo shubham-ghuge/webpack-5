@@ -4,6 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpackConfig = {
     entry: path.resolve(__dirname, "src", "index.js"),
 
+    output: {
+        filename: "[name].bundle.js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true /* to clean every time on build */
+    },
+
     module: {
         rules: [
             // to use import export feat.
@@ -29,6 +35,7 @@ const webpackConfig = {
             }
         ]
     },
+
     // plugin to automate build the process
     plugins: [
         new HtmlWebpackPlugin({
@@ -38,11 +45,19 @@ const webpackConfig = {
         })
     ],
 
-    output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist"),
-        clean: true /* to clean every time on build */
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                node_vendors: {
+                    name: "vendor",
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: "all",
+                    priority: 1
+                }
+            }
+        }
     },
+
     mode: "production"
 }
 module.exports = webpackConfig;
