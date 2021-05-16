@@ -5,7 +5,7 @@ const webpackConfig = {
     entry: path.resolve(__dirname, "src", "index.js"),
 
     output: {
-        filename: "[name].bundle.js",
+        filename: "[name].[contenthashmap].bundle.js",
         path: path.resolve(__dirname, "dist"),
         clean: true /* to clean every time on build */
     },
@@ -56,6 +56,12 @@ const webpackConfig = {
                 }
             }
         }
+    },
+
+    devtool: "inline-source-map",
+
+    devServer: {
+        contentBase: "./dist"
     },
 
     mode: "production"
