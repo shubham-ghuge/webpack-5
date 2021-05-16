@@ -2,7 +2,7 @@ import "./app.css"
 
 const App = ({ name }) => {
     return `
-    <h2> Welcome, ${name} </h2>
+    <h2> Hello , ${name} </h2>
     `;
 };
 
